@@ -1,0 +1,163 @@
+﻿{
+  "info": {
+    "name": "Tiny Ledger - Controller Endpoints",
+    "_postman_id": "e2b9e9d0-0000-4fb4-9cde-000000000000",
+    "description": "Postman collection matching your LedgerController endpoints (/api).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Transaction - Deposit (A1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountType\":\"SAVINGS\",\n  \"type\":\"DEPOSIT\",\n  \"amount\":100.00,\n  \"currency\":\"USD\",\n  \"referenceId\":\"ref-001\",\n  \"timestamp\":\"2025-10-23T10:00:00Z\",\n  \"transactionCode\":\"ATM-DEP-001\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A1/transactions",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A1", "transactions" ]
+        }
+      }
+    },
+    {
+      "name": "Create Transaction - Withdrawal (A1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountType\":\"SAVINGS\",\n  \"type\":\"WITHDRAWAL\",\n  \"amount\":40.00,\n  \"currency\":\"USD\",\n  \"referenceId\":\"ref-002\",\n  \"transactionCode\":\"POS-WDR-001\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A1/transactions",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A1", "transactions" ]
+        }
+      }
+    },
+    {
+      "name": "Create Transaction - Deposit (A2)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountType\":\"SAVINGS\",\n  \"type\":\"DEPOSIT\",\n  \"amount\":200.50,\n  \"currency\":\"USD\",\n  \"referenceId\":\"ref-101\",\n  \"transactionCode\":\"ATM-DEP-002\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A2/transactions",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A2", "transactions" ]
+        }
+      }
+    },
+    {
+      "name": "Get Global Ledger Rows",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/api/ledger",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "ledger" ]
+        }
+      }
+    },
+    {
+      "name": "Get Account Transactions (A1)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A1/transactions",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A1", "transactions" ]
+        }
+      }
+    },
+    {
+      "name": "Get Current Balance (A1)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A1/balance",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A1", "balance" ]
+        }
+      }
+    },
+    {
+      "name": "Get Balance At (A1) - sample time",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A1/balanceAt?at=2025-10-23T10:30:00Z",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A1", "balanceAt" ],
+          "query": [ { "key": "at", "value": "2025-10-23T10:30:00Z" } ]
+        }
+      }
+    },
+    {
+      "name": "Idempotency Test - Repeat A1→A2 TX (same reference)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountType\":\"SAVINGS\",\n  \"type\":\"DEPOSIT\",\n  \"amount\":100.00,\n  \"currency\":\"USD\",\n  \"referenceId\":\"idemp-555\",\n  \"transactionCode\":\"TXN-REPEAT-001\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A1/transactions",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A1", "transactions" ]
+        }
+      }
+    },
+    {
+      "name": "Currency Mismatch Test (should error)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountType\":\"SAVINGS\",\n  \"type\":\"DEPOSIT\",\n  \"amount\":10.00,\n  \"currency\":\"INR\",\n  \"referenceId\":\"ref-mis-1\",\n  \"transactionCode\":\"TXN-MIS-001\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/A1/transactions",
+          "protocol": "http",
+          "host": [ "localhost" ],
+          "port": "8080",
+          "path": [ "api", "accounts", "A1", "transactions" ]
+        }
+      }
+    }
+  ]
+}
