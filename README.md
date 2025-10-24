@@ -37,7 +37,7 @@ Make sure you have:
 ## 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/tiny-ledger.git
+git clone https://github.com/tarangb/tiny-ledger.git
 cd tiny-ledger
 ```
 
