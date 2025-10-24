@@ -76,7 +76,7 @@ Once started, the service will be available at:
 
 ## 📮 API Usage
 You can test all endpoints using the provided Postman collection file:
-ledger-service.postman_collection.json
+**ledger-service.postman_collection.json**
 
 **Steps to use Postman:**
 - 1 Open Postman.
